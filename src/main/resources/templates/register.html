@@ -29,26 +29,26 @@ $(function(){
 					<div class="form-group row">
 							<label for="name" class="col-12 col-sm-3 col-md-2 col-form-lable">Name</label>
 							<div class="col-12 col-sm-9 col-md-10">
-								<input type="text" id="name" name="name" class="form-control" />
+								<input type="text" id="name" name="name" class="form-control" th:field="${user.name}"/>
 							</div>
 					</div>
 					<div class="form-group row">
 							<label for="email" class="col-12 col-sm-3 col-md-2 col-form-lable">Email</label>
 							<div class="col-12 col-sm-9 col-md-10">
-								<input type="text" id="email" name="email" class="form-control" />
+								<input type="text" id="username" name="username" class="form-control" th:field="${user.username}"/>
 							</div>
 					</div>
 					
 					<div class="form-group row">
 							<label for="password" class="col-12 col-sm-3 col-md-2 col-form-lable">Password</label>
 							<div class="col-12 col-sm-9 col-md-10">
-								<input type="text" id="password" name="password" class="form-control" />
+								<input type="password" id="password" name="password" class="form-control" th:field="${user.password}"/>
 							</div>
 					</div>
 					<div class="form-group row">
 							<label for="cpassword" class="col-12 col-sm-3 col-md-2 col-form-lable">Confirm password</label>
 							<div class="col-12 col-sm-9 col-md-10">
-								<input type="text" id="cpassword" name="cpassword" class="form-control" />
+								<input type="password" id="cpassword" name="cpassword" class="form-control" />
 							</div>
 					</div>
 <!-- 					<button type="button" class="btn btn-lg btn-info" id="back">Back</button> -->
@@ -59,7 +59,7 @@ $(function(){
 						</div>
 						<div class="col-6">
 							<button type="submit" class="btn btn-info col-6 float-right"
-								id="signUp">Sign up</button>
+								id="signUp">Sign in</button>
 						</div>
 					</div>
 				</form>

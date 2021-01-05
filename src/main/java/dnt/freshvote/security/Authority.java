@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -24,5 +25,6 @@ public class Authority implements GrantedAuthority {
 	private String authority;
 	
 	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private User user;
 }

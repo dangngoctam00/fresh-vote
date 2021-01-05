@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+	<title>FreshVote Dashboard</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container" style="margin-top: 20px;" th:if="${product != null}">
+		<h1>Product</h1>		
+		<form action="" method="POST">
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+			<input type="hidden" th:field="${product.id}"/>
+			<div class="form-group row">
+				<label for="name" class="col-12 col-sm-3 col-md-2 col-form-label">Name: </label>
+				<div class="col-12 col-sm-9 col-md-10">
+					<input type="text" class="form-control" th:field="${product.name}"/>
+				</div>
+			</div>
+			<div class="form-check form-switch">
+			  <input class="form-check-input" type="checkbox" th:field="${product.published}">
+			  <label class="form-check-label" for="product1">Is published</label>
+			</div>			
+			<button class="btn btn-primary">Update product</button>
+		</form>
+	</div>		
+</body>
+</html>

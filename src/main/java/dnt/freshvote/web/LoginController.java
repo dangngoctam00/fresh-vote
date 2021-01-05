@@ -26,6 +26,7 @@ public class LoginController {
 	
 	@Autowired
 	private UserService userService;
+	
 	@PostMapping("/register")
 	public String registerPost(@ModelAttribute User user) {
 		userService.saveUser(user);

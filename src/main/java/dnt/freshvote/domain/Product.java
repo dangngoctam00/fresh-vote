@@ -9,33 +9,28 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-import dnt.freshvote.security.Authority;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Data
 @Entity
-@Table(name="users")
-public class User {
+public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String username;
-	private String password;
+	
 	private String name;
+	private Boolean published;
 	
-	//multivalued  attribute
+	@ManyToOne
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER ,mappedBy = "user", orphanRemoval=true)
-	private Set<Authority> authorities = new HashSet<>();
+	private User user;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY ,mappedBy = "user")
-	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
-	private Set<Product> products = new HashSet<Product>();
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY ,mappedBy = "product")
+	private Set<Feature> features = new HashSet<Feature>();
 }
