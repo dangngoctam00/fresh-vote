@@ -2,6 +2,8 @@ package dnt.freshvote.web;
 
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -42,6 +44,18 @@ public class ProductController {
 			respone.sendError(HttpStatus.NOT_FOUND.value(), "Product with id " + productId + " is not found.");
 		}
 		return "product";
+	}
+	
+	@GetMapping("/p/{productName}")
+	public String getProductByName(@PathVariable String productName, ModelMap model) {
+		if (productName != null) {
+			String productNameDecoded = URLDecoder.decode(productName, StandardCharsets.UTF_8);
+			Optional<Product> productOpt = productRepo.findByName(productNameDecoded);
+			if (productOpt.isPresent()) {
+				model.put("product", productOpt.get());
+			}
+		}
+		return "productUserView";
 	}
 	
 	@PostMapping("/products/{productId}")

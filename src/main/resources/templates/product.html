@@ -2,9 +2,10 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
 	<title>FreshVote Dashboard</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	<script th:replace="fragments/header :: headerElement"></script>
 </head>
 <body>
+	<div th:replace="fragments/header :: header"></div>
 	<div class="container" style="margin-top: 20px;" th:if="${product != null}">
 		<h1>Product</h1>		
 		<form action="" method="POST">
@@ -17,9 +18,9 @@
 					<input type="text" class="form-control" th:field="${product.name}"/>
 				</div>
 			</div>
-			<div class="form-check form-switch">
-			  <input class="form-check-input" type="checkbox" th:field="${product.published}">
-			  <label class="form-check-label" for="published1">Is published</label>
+			<div class="custom-control custom-switch">
+			  <input class="custom-control-input" type="checkbox" th:field="${product.published}">
+			  <label class="custom-control-label" for="published1">Is published</label>
 			</div>			
 			<button class="btn btn-primary">Update product</button>
 		</form>

@@ -1,8 +1,24 @@
-<html>
-	<head>
-		<title>FreshVotes Homepage</title>
-	</head>
-	<body>
-		<h3>Hello ;)</h3>
-	</body>
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+	<title>FreshVote Homepage</title>
+	<script th:replace="fragments/header :: headerElement"></script>
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<div class="row"  style="margin-top: 20px">
+			<div class="col-8">
+				<h3>FreshVotes Homepage</h3>
+			</div>					
+		</div>
+	</div>	
+	
+	<script type="text/javascript">
+		let loginBtn = document.getElementById('login');
+		loginBtn.addEventListener('click', function() {
+			window.location.href = '/login';
+		});
+	</script>
+</body>	
 </html>

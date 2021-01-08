@@ -38,4 +38,9 @@ public class User {
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	private Set<Product> products = new HashSet<Product>();
+	
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY ,mappedBy = "user")
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	private Set<Feature> features = new HashSet<Feature>();
 }

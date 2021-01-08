@@ -16,5 +16,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 			+ " where p.id = :id")
 	Optional<Product> findByIdWithUser(Long id);
 	List<Product> findByUser(User user);
+	Optional<Product> findByName(String name);
 }
 	

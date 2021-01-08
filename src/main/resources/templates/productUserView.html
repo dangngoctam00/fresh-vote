@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+	<title>FreshVote Dashboard</title>
+	<script th:replace="fragments/header :: headerElement"></script>
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container" style="margin-top: 20px;" th:if="${product != null}">
+		<h1>Product</h1>
+		<div th:each="feature : ${product.features}" >
+			<a th:href="@{/products/{productId}/features/{featureId}(productId = ${product.id}, featureId=${feature.id})}" th:text="${feature.title}"></a>
+		</div>	
+			
+		<form th:action="@{/products/{productId}/features(productId=${product.id})}" method="POST">
+			
+			<button class="btn btn-primary">Create feature request</button>
+		</form>
+	</div>		
+</body>
+</html>

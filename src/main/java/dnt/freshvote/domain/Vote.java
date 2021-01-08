@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Votes {
+public class Vote {
 	
 	@EmbeddedId
 	private VoteId pk;
