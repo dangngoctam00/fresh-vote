@@ -1,16 +1,18 @@
 package dnt.freshvote.domain;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,18 +31,16 @@ public class Feature {
 	@ManyToOne
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-	@JsonIgnore
 	private Product product;
 	
 	@ManyToOne
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-	@JsonIgnore
 	private User user;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "feature")
 	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
-	@JsonIgnore
-	private Set<Comment> comments = new HashSet<Comment>();
+	@EqualsAndHashCode.Exclude	
+	@OrderBy("createdDate, id")
+	private Set<Comment> comments = new TreeSet<Comment>();
 }

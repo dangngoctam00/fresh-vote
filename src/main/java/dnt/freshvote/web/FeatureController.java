@@ -3,7 +3,10 @@ package dnt.freshvote.web;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import dnt.freshvote.domain.Comment;
 import dnt.freshvote.domain.Feature;
 import dnt.freshvote.domain.User;
 import dnt.freshvote.service.FeatureService;
@@ -37,13 +41,32 @@ public class FeatureController {
 		Optional<Feature> featureOpt = featureService.findById(featureId);
 		if (featureOpt.isPresent()) {
 			model.put("feature", featureOpt.get());
-			model.put("comments", featureOpt.get().getComments());
+			Set<Comment> comments = this.getCommentsWithoutDuplicate(new TreeSet<Long>(),featureOpt.get().getComments());
+			model.put("thread", comments);
 		}
 		
-		//TODO: handle situation cannot find Feature by id
-		
+//		System.out.print("Comments: " + featureOpt.get().getComments() + "\n");
+		model.put("comment", new Comment());
 		model.put("user", user);
 		return "feature";
+	}
+	
+	public Set<Comment> getCommentsWithoutDuplicate(Set<Long> visitedComment ,Set<Comment> comments) {
+		Iterator<Comment> commentIt = comments.iterator();
+		while(commentIt.hasNext()) {
+			Comment comment = commentIt.next();
+			if (visitedComment.contains(comment.getId())) {
+				commentIt.remove();
+				continue;
+			}
+			else {
+				visitedComment.add(comment.getId());
+			}
+			if (!comment.getComments().isEmpty()) {
+				this.getCommentsWithoutDuplicate(visitedComment, comment.getComments());
+			}
+		}
+		return comments;
 	}
 	
 	@PostMapping("{featureId}")
